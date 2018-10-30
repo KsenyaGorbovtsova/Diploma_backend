@@ -1,0 +1,4 @@
+module CCryptoOpenSSL {
+    umbrella "/Users/GorbovtsovaKsenya/Desktop/FitAppBack/.build/checkouts/crypto.git-5418683759083930664/Sources/CCryptoOpenSSL/include"
+    export *
+}

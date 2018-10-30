@@ -1,0 +1,4 @@
+module CNIODarwin {
+    umbrella "/Users/GorbovtsovaKsenya/Desktop/FitAppBack/.build/checkouts/swift-nio.git--362342214291153311/Sources/CNIODarwin/include"
+    export *
+}
