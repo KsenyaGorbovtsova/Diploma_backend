@@ -13,9 +13,10 @@ public func routes(_ router: Router) throws {
     }
 
     // Example of configuring a controller
-    let apparatusController = ApparatusController()
+    /*let apparatusController = ApparatusController()
     router.get("apparatuses", use: apparatusController.index)
-    router.post("apparatuses", use: apparatusController.create)
+    router.post("apparatuses", use: apparatusController.create)*/
+    try router.register(collection: ApparatusController())
     let measureUnitController = MeasureUnitController()
     router.get("measureunits", use: measureUnitController.index)
     router.post("measureunits", use: measureUnitController.create)
