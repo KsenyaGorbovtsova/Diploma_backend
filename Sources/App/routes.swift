@@ -17,8 +17,6 @@ public func routes(_ router: Router) throws {
     router.get("apparatuses", use: apparatusController.index)
     router.post("apparatuses", use: apparatusController.create)*/
     try router.register(collection: ApparatusController())
-    let measureUnitController = MeasureUnitController()
-    router.get("measureunits", use: measureUnitController.index)
-    router.post("measureunits", use: measureUnitController.create)
+    try router.register(collection: MeasureUnitController())
   
 }
