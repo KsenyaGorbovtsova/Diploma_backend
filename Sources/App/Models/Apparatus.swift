@@ -24,9 +24,9 @@ final class Apparatus: PostgreSQLUUIDModel {
 extension Apparatus: Content {}
 extension Apparatus: Migration {}
 extension Apparatus: Parameter {}
-/*extension Apparatus {
+extension Apparatus {
     var exercises: Children <Apparatus, Exercise> {
         return self.children(\.apparatusId)
     }
 }
-*/
+

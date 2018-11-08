@@ -22,4 +22,9 @@ final class MeasureUnit: PostgreSQLUUIDModel {
 extension MeasureUnit: Content {}
 extension MeasureUnit: Migration {}
 extension MeasureUnit: Parameter {}
+extension MeasureUnit {
+    var exercises: Children <MeasureUnit, Exercise> {
+        return self.children(\.measure_unitId)
+    }
+}
 

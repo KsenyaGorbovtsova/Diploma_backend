@@ -18,5 +18,6 @@ public func routes(_ router: Router) throws {
     router.post("apparatuses", use: apparatusController.create)*/
     try router.register(collection: ApparatusController())
     try router.register(collection: MeasureUnitController())
+    try router.register(collection: ExerciseController())
   
 }
