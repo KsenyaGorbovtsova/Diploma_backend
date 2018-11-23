@@ -31,6 +31,8 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     migrations.add(model: Apparatus.self, database: .psql)
     migrations.add(model: MeasureUnit.self, database: .psql)
     migrations.add(model: Exercise.self, database: .psql)
+    migrations.add(model: ExercisePracticeConnection.self, database:  .psql)
+    migrations.add(model: Practice.self, database:  .psql)
     services.register(migrations)
     
     var commands = CommandConfig.default()

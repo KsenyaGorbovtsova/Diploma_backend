@@ -9,7 +9,7 @@ import Foundation
 import Vapor
 import Fluent
 import HTTP
-
+import FluentSQL
 /*final class ExerciseController: RouteCollection {
     func boot(router: Router) throws {
         let exercises = router.grouped("exercises", Exercise.parameter, "apparatuses")
@@ -26,6 +26,7 @@ final class ExerciseController: RouteCollection {
         exercises.post(  ExerciseBody.self, use: create )
         exercises.patch(ExerciseBody.self, at: Exercise.ID.parameter, use: update)
         exercises.delete(Exercise.parameter, use: delete)
+        exercises.get("search", use: search)
     }
     //----получить снаряд по ключу упражнения-------
     func getApparatus (_ req: Request) throws -> Future<[Apparatus]> {
@@ -56,18 +57,22 @@ final class ExerciseController: RouteCollection {
         /*if app == nil {
             throw Abort(.badRequest, reason: "apparatus with given id: \(appId) could not be found \(app)")
         }*/
-       
        let id = try  req.parameters.next(Exercise.ID.self)
         let exercise = body.model()
         exercise.id  = id
         return exercise.update(on: req)
-        
     }
     //----удалить упражнение ------
     func delete(_ req: Request) throws -> Future<HTTPStatus>{
         return try req.parameters.next(Exercise.self).delete(on: req).transform(to: .noContent)
     }
-    
+    //----поиск упражнения по названию ------localhost:8080/exercises/search?name=Подтягивание
+    func search (_ req: Request) throws -> Future<[Exercise]> {
+        let name = try req.query.get(String.self, at: "name")
+        return Exercise.query(on: req).group(.or) { query in
+            query.filter(\.name =~ name)
+        }.all()
+    }
     struct ExerciseBody: Content {
         //var id: UUID
         var name: String
