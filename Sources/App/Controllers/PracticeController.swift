@@ -54,7 +54,10 @@ final class PracticeController: RouteCollection{
             return current.deleteExercise(exercise: deleted, on: req).transform(to: .noContent)
         }
     }
-    
+    //----удалить упражнение ------
+    func delete(_ req: Request) throws -> Future<HTTPStatus>{
+        return try req.parameters.next(Practice.self).delete(on: req).transform(to: .noContent)
+    }
     struct PracticeBody: Content {
         var status: Bool
         var date: Date
