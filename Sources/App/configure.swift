@@ -1,11 +1,11 @@
 import FluentPostgreSQL
 import Vapor
-
+import Authentication
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
     /// Register providers first
     try services.register(FluentPostgreSQLProvider())
-
+    try services.register(AuthenticationProvider())
     /// Register routes to the router
     let router = EngineRouter.default()
     try routes(router)
@@ -33,6 +33,9 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     migrations.add(model: Exercise.self, database: .psql)
     migrations.add(model: ExercisePracticeConnection.self, database:  .psql)
     migrations.add(model: Practice.self, database:  .psql)
+    migrations.add(model: User.self, database: .psql)
+    migrations.add(model: Token.self, database: .psql)
+    //migrations.add(migration: AdminUser.self, database: .psql)
     services.register(migrations)
     
     var commands = CommandConfig.default()

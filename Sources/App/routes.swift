@@ -20,5 +20,6 @@ public func routes(_ router: Router) throws {
     try router.register(collection: MeasureUnitController())
     try router.register(collection: ExerciseController())
     try router.register(collection: PracticeController())
+    try router.register(collection: UserController())
   
 }
