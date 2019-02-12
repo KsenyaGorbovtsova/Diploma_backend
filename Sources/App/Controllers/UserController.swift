@@ -23,12 +23,43 @@ final class UserController: RouteCollection {
         let tokenAuthMiddleware = User.tokenAuthMiddleware()
         let tokenProtected = usersRoute.grouped(tokenAuthMiddleware, guardAuthMiddleware)
         tokenProtected.delete(User.parameter, use: deleteUser)
-        tokenProtected.get(User.parameter, use: getUser)
+        tokenProtected.get(User.parameter, use: getPublicUser)
         tokenProtected.patch(UserContent.self, at: User.parameter, use: updateUser)
         tokenProtected.get(use: getPublicUsers)
         tokenProtected.get("logout", use: logout)
+        tokenProtected.post(User.parameter, "add practice", use: addPracticeToUser)
+        tokenProtected.get(User.parameter, "practices", use: getPractices)
+        tokenProtected.delete(User.parameter, "delete", use: deletePracticeFromUser)
+        
     }
     
+    //-------тренировки одного пользователя------
+    func getPractices (_ req: Request) throws -> Future<[Practice]> {
+        return try req.parameters.next(User.self).flatMap { practice in
+            return try practice.containg.query(on: req).all()
+        }
+    }
+    //------добавить тренировку пользователю
+    func addPracticeToUser(_ req: Request) throws -> Future <[String:User]> {
+        let current = try req.parameters.next(User.self)
+        let containingId = req.content.get(Practice.ID.self, at: "contain")
+        let contain = containingId.and(result: req).flatMap(Practice.find).unwrap(or: Abort(.badRequest, reason: "no such id"))
+        return flatMap (to: (current: User, containing: Practice).self, current, contain) { current, contain in
+            return current.addPractice(practice: contain, on: req)
+            }.map {users -> [String: User] in
+                return ["current": users.current]
+        }
+    }
+    //-----удалить тренировку у пользователя-----
+    func deletePracticeFromUser (_ req: Request) throws -> Future<HTTPStatus> {
+        let current = try req.parameters.next(User.self)
+        let deletedId = req.content.get(Practice.ID.self, at: "delete")
+        let deleted = deletedId.and(result: req).flatMap(Practice.find).unwrap(or: Abort( .badRequest, reason: "no such uid"))
+        return flatMap(to: HTTPStatus.self, current, deleted) {current, deleted in
+            return current.deletePractice(practice: deleted, on: req).transform(to: .noContent)
+        }
+    }
+    //------получить публичные данные пользователей-------
     func getPublicUsers(_ req: Request) throws -> Future<[PublicUser]>{
         let users = User.query(on:req).all()
         return users.map { users -> [PublicUser] in
@@ -40,7 +71,8 @@ final class UserController: RouteCollection {
             }
         }
     }
-    func getUser (_ req: Request) throws -> Future<PublicUser> {
+    //-------получить публичные данные пользователя------
+    func getPublicUser (_ req: Request) throws -> Future<PublicUser> {
         let user = try req.parameters.next(User.self)
         return user.map { user -> PublicUser in
             PublicUser(
@@ -49,13 +81,14 @@ final class UserController: RouteCollection {
                 email: user.email)
         }
     }
-
+    //--------создание пользователя-------
     func createUser(_ req: Request) throws -> Future<User> {
         return try req.content.decode(User.self).flatMap { (user) in
             user.password = try BCrypt.hash(user.password)
             return user.save(on: req)
         }
     }
+    //-----редактирование пользователя-----
     func updateUser (_ req: Request, _ body: UserContent) throws -> Future<User> {
         let user = try req.parameters.next(User.self)
         return user.map(to: User.self,  { user in
@@ -67,11 +100,13 @@ final class UserController: RouteCollection {
             return user
         }).update(on: req)
     }
+    //------логин------
     func login(_ req: Request) throws -> Future<Token> {
         let user = try req.requireAuthenticated(User.self)
         let token = try Token.generate(for: user)
         return token.save(on: req)
     }
+    //------выход------
     func logout(_ req: Request) throws -> Future<HTTPResponse> {
         let user = try req.requireAuthenticated(User.self)
         return try Token
@@ -80,6 +115,7 @@ final class UserController: RouteCollection {
             .delete()
             .transform(to: HTTPResponse(status: .ok))
     }
+    //------удаление пользователя-------
     func deleteUser(_ req: Request) throws -> Future<HTTPStatus>{
         return try req.parameters.next(User.self).flatMap { (user) in
             return user.delete(on: req).transform(to: HTTPStatus.noContent)

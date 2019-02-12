@@ -25,8 +25,8 @@ final class PracticeController: RouteCollection{
     }
     //---выгрузить упражнения, входящие в тренировку-------
     func exercisesInPractice (_ req: Request) throws -> Future<[Exercise]> {
-        return try req.parameters.next(Practice.self).flatMap { practice in
-            return try practice.containing.query(on: req).all()
+        return try req.parameters.next(Practice.self).flatMap { exercise in
+            return try exercise.containing.query(on: req).all()  ///!!!!!!!!
         }
     }
     //------создать тренировку----/
@@ -54,7 +54,7 @@ final class PracticeController: RouteCollection{
             return current.deleteExercise(exercise: deleted, on: req).transform(to: .noContent)
         }
     }
-    //----удалить упражнение ------
+    //----удалить тренировку ------
     func delete(_ req: Request) throws -> Future<HTTPStatus>{
         return try req.parameters.next(Practice.self).delete(on: req).transform(to: .noContent)
     }

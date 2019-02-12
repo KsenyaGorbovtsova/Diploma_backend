@@ -36,10 +36,13 @@ extension User: Migration {
     static func prepare(on conn: PostgreSQLConnection) -> Future<Void> {
         return Database.create(self, on: conn) { (builder) in
             try addProperties(to: builder)
+            
             builder.unique(on: \.email)
+            
         }
     }
 }
+
 extension User: BasicAuthenticatable {
     static var usernameKey: WritableKeyPath<User, String> {
         return \User.email
@@ -52,6 +55,8 @@ extension User: BasicAuthenticatable {
 extension User: TokenAuthenticatable {
     typealias TokenType = Token
 }
+
+
 /*struct AdminUser: Migration {
     typealias Database = PostgreSQLDatabase
     

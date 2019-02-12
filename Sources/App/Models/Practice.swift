@@ -24,3 +24,4 @@ final class Practice: PostgreSQLUUIDModel {
 extension Practice: Content{}
 extension Practice: Migration{}
 extension Practice: Parameter{}
+

@@ -10,16 +10,12 @@ import FluentPostgreSQL
 
 final class ExercisePracticeConnection: PostgreSQLPivot {
     
-    
-   
     var id: Int?
+    
     static var leftIDKey: WritableKeyPath <ExercisePracticeConnection, UUID> = \.practiceId
     static var rightIDKey: WritableKeyPath <ExercisePracticeConnection, UUID> = \.exerciseId
     typealias Left = Practice
     typealias Right = Exercise
-    
-    
-    
     
     var practiceId: UUID
     var exerciseId: UUID
