@@ -5641,7 +5641,7 @@
 		"Crypto::Crypto::Product" /* Crypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Crypto::Random::Product" /* Random.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Random.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"DatabaseKit::DatabaseKit::Product" /* DatabaseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DatabaseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"FitAppBack::App::Product" /* App.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"FitAppBack::App::Product" /* App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"FitAppBack::AppTests::Product" /* AppTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		"FitAppBack::Run::Product" /* Run */ = {isa = PBXFileReference; lastKnownFileType = text; path = Run; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Fluent::Fluent::Product" /* Fluent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fluent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -8382,7 +8382,7 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -8392,7 +8392,6 @@
 				OBJ_34 /* Dependencies */,
 				OBJ_956 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_503 /* Routing */ = {
@@ -11518,6 +11517,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					"FitAppBack::App" = {
+						LastSwiftMigration = 1000;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "FitAppBack" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -11526,7 +11530,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_956 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -15862,6 +15866,8 @@
 		OBJ_1006 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -15905,6 +15911,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGET_NAME = App;
 			};
@@ -15913,6 +15920,8 @@
 		OBJ_1007 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

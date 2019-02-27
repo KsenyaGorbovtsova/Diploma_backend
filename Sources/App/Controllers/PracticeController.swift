@@ -17,6 +17,7 @@ final class PracticeController: RouteCollection{
         practice.post(PracticeBody.self, use: create)
         practice.post( Practice.parameter,"addExercise", use: addExerciseToPractice)
         practice.delete(Practice.parameter, "delete", use: deleteExerciseFromPractice)
+        practice.delete(Practice.parameter,"delete", use: delete)
         
     }
     ///----выгрузить все------
