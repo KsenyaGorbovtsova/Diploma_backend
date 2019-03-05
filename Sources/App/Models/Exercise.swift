@@ -20,14 +20,14 @@ final class Exercise: PostgreSQLUUIDModel {
     var status: Bool
     var num_measure: Int
     
-    public init (name: String, num_try: Int, apparatusId: Apparatus.ID, num_rep: Int, num_measure: Int, measure_unitId: MeasureUnit.ID) {
+    public init (name: String, num_try: Int, apparatusId: Apparatus.ID, num_rep: Int, num_measure: Int, measure_unitId: MeasureUnit.ID, status: Bool) {
         
         self.name = name
         self.num_try = num_try
         self.apparatusId = apparatusId
         self.num_rep = num_rep
         self.num_measure = num_measure
-        self.status = false
+        self.status = status
         self.measure_unitId = measure_unitId
     
     }

@@ -23,7 +23,7 @@ final class ExerciseController: RouteCollection {
         exercises.get("apparatus",Exercise.parameter,use: getApparatus)
         exercises.get(use: getExercises)
         exercises.get(Exercise.parameter, use: getOneExercise)
-        exercises.post(  ExerciseBody.self, use: create )
+        exercises.post(ExerciseBody.self, use: create )
         exercises.patch(ExerciseBody.self, at: Exercise.ID.parameter, use: update)
         exercises.delete(Exercise.parameter, use: delete)
         exercises.get("search", use: search)
