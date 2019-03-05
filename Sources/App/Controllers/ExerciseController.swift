@@ -84,7 +84,7 @@ final class ExerciseController: RouteCollection {
         var measure_unitId: UUID
         
         func model() -> Exercise {
-            return Exercise (name: self.name , num_try:self.num_try , apparatusId: self.apparatusId, num_rep: self.num_rep , num_measure: self.num_measure, measure_unitId: self.measure_unitId  )
+            return Exercise (name: self.name , num_try:self.num_try , apparatusId: self.apparatusId, num_rep: self.num_rep , num_measure: self.num_measure, measure_unitId: self.measure_unitId, status: self.status  )
         }
     }
  
