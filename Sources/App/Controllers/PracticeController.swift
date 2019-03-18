@@ -13,6 +13,7 @@ final class PracticeController: RouteCollection{
     func boot(router: Router) throws {
         let practice = router.grouped("practices")
         practice.get(use: getPractices )
+        practice.get(Practice.parameter, use: getOnePractice)
         practice.get(Practice.parameter, "contain", use: exercisesInPractice)
         practice.post(PracticeBody.self, use: create)
         practice.post( Practice.parameter,"addExercise", use: addExerciseToPractice)
@@ -23,6 +24,10 @@ final class PracticeController: RouteCollection{
     ///----выгрузить все------
     func getPractices (_ req: Request) throws -> Future<[Practice]>{
         return Practice.query(on: req).all()
+    }
+    ///-----выгрузить одну тренировку------
+    func getOnePractice (_ req: Request) throws -> Future<Practice>{
+        return try req.parameters.next(Practice.self)
     }
     //---выгрузить упражнения, входящие в тренировку-------
     func exercisesInPractice (_ req: Request) throws -> Future<[Exercise]> {
