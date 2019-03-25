@@ -25,7 +25,7 @@ final class UserController: RouteCollection {
         tokenProtected.delete(User.parameter, use: deleteUser)
         tokenProtected.get(User.parameter, use: getPublicUser)
         tokenProtected.patch(UserContent.self, at: User.parameter, use: updateUser)
-        tusersRoute.get(use: getPublicUsers)
+        usersRoute.get(use: getPublicUsers)
         tokenProtected.get("logout", use: logout)
         tokenProtected.post(User.parameter, "add practice", use: addPracticeToUser)
         tokenProtected.get(User.parameter, "practices", use: getPractices)
