@@ -48,7 +48,7 @@ final class PracticeController: RouteCollection{
         return flatMap (to: (current: Practice, containing: Exercise).self, current, contain) { current, contain in
             return current.addExercise(exercise: contain, on: req)
             }.map {practices -> [String: Practice] in
-                return ["current":practices.current] //можно удалить но вдруг понадобится
+                return ["current":practices.current] //можно удалить, но вдруг понадобится
         }
     }
     //------удалить упражнения из тренировки-----
