@@ -66,10 +66,10 @@ final class PracticeController: RouteCollection{
     }
     struct PracticeBody: Content {
         var status: Bool
-        var date: Date
         var name: String
+        var owner: UUID
         func model() -> Practice {
-            return Practice (date: self.date, status: self.status, name: self.name)
+            return Practice (status: self.status, name: self.name, owner: self.owner)
         }
     }
 }

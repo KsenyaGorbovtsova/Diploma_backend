@@ -12,14 +12,14 @@ import FluentPostgreSQL
 final class Practice: PostgreSQLUUIDModel {
     
     var id: UUID?
-    var date: Date
     var status: Bool
     var name: String
-    
-    public init (date: Date, status: Bool, name: String) {
-        self.date = date
+    var owner: UUID
+    public init ( status: Bool, name: String, owner: UUID) {
+       
         self.status = status
         self.name = name
+        self.owner = owner
     }
 }
 

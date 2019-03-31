@@ -43,11 +43,9 @@ final class UserController: RouteCollection {
     func addPracticeToUser(_ req: Request) throws -> Future <[String:User]> {
         let current = try req.parameters.next(User.self)
         let containingId = req.content.get(Practice.ID.self, at: "contain")
-        let date = req.content.get(Date.self, at: "date")
-        let repeatAfter = req.content.get(Int.self, at: "repeatAfter")
         let contain = containingId.and(result: req).flatMap(Practice.find).unwrap(or: Abort(.badRequest, reason: "no such id"))
-        return flatMap (to: (current: User, containing: Practice).self, current, contain, date, repeatAfter) { current, contain, date, repeatAfter in
-            return current.addPractice(date: date, repeatAfter: repeatAfter, practice: contain,  on: req)
+        return flatMap (to: (current: User, containing: Practice).self, current, contain) { current, contain in
+            return current.addPractice( practice: contain,  on: req)
             }.map {users -> [String: User] in
                 return ["current": users.current]
         }

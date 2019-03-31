@@ -21,7 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		9EF25B8B21C90CF500C3D2F9 /* PracticeOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF25B8A21C90CF500C3D2F9 /* PracticeOwner.swift */; };
 		OBJ_1009 /* ApparatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* ApparatusController.swift */; };
 		OBJ_1010 /* ExerciseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* ExerciseController.swift */; };
 		OBJ_1011 /* MeasureUnitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* MeasureUnitController.swift */; };
@@ -5625,7 +5624,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9EF25B8A21C90CF500C3D2F9 /* PracticeOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeOwner.swift; sourceTree = "<group>"; };
 		"Auth::Authentication::Product" /* Authentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Authentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Console::Command::Product" /* Command.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Command.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Console::Console::Product" /* Console.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Console.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -7576,7 +7574,6 @@
 				OBJ_19 /* Exercise.swift */,
 				OBJ_20 /* ExercisePracticeConnection.swift */,
 				OBJ_21 /* MeasureUnit.swift */,
-				9EF25B8A21C90CF500C3D2F9 /* PracticeOwner.swift */,
 				OBJ_22 /* Practice.swift */,
 				OBJ_23 /* Token.swift */,
 				OBJ_24 /* User.swift */,
@@ -11528,6 +11525,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = OBJ_5;
@@ -11627,7 +11625,6 @@
 				OBJ_1020 /* User.swift in Sources */,
 				OBJ_1021 /* UserPracticeConnection.swift in Sources */,
 				OBJ_1022 /* app.swift in Sources */,
-				9EF25B8B21C90CF500C3D2F9 /* PracticeOwner.swift in Sources */,
 				OBJ_1023 /* boot.swift in Sources */,
 				OBJ_1024 /* configure.swift in Sources */,
 				OBJ_1025 /* routes.swift in Sources */,
