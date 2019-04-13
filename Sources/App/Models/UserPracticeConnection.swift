@@ -35,7 +35,7 @@ extension User {
     var containg: Siblings <User, Practice, UserPracticeConnection> {
         return self.siblings(\UserPracticeConnection.userId, \UserPracticeConnection.practiceId)
     }
-    func addPractice ( practice: Practice, on connection: DatabaseConnectable) -> Future<(current: User, containing: Practice)> {
+    func addPractice (practice: Practice, on connection: DatabaseConnectable) -> Future<(current: User, containing: Practice)> {
         return Future.flatMap(on: connection) {
             let pivot = try UserPracticeConnection(left: self, right: practice)
             return pivot.save(on: connection).transform(to: (self, practice))

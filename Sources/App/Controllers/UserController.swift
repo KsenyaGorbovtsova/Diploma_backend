@@ -71,6 +71,26 @@ final class UserController: RouteCollection {
             }
         }
     }
+    //-------добавить друга пользователю---------------
+    func addFriendtoUser(_ req: Request) throws -> Future <[String: User]> {
+        let current =  try req.parameters.next(User.self)
+        let makeFriendId = req.content.get(User.ID.self, at: "makeFriend")
+        let makeFriend = makeFriendId.and(result: req).flatMap(User.find).unwrap(or: Abort(.badRequest, reason: "no such id"))
+        return flatMap(to: (current: User, makeFriend: User).self, current, makeFriend) { current, makeFriend in
+        return current.addFriend(friend: makeFriend, on: req)
+            }.map {users -> [String:User] in
+                return ["makeFriend":users.makeFriend]
+        }
+    }
+    //-------удалить друга у пользователя----------------
+    func deleteFriendFromUser (_ req: Request) throws -> Future<HTTPStatus>{
+        let current = try req.parameters.next(User.self)
+        let deletedId = req.content.get(User.ID.self, at: "delete")
+        let deleted = deletedId.and(result: req).flatMap(User.find).unwrap(or: Abort (.badRequest, reason: "no such uid"))
+        return flatMap(to: HTTPStatus.self, current, deleted) { current, deleted in
+            return current.deleteFriend(friend: deleted, on: req).transform(to: .noContent)
+        }
+    }
     //-------получить публичные данные пользователя------
     func getPublicUser (_ req: Request) throws -> Future<PublicUser> {
         let user = try req.parameters.next(User.self)

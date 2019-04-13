@@ -15,8 +15,11 @@ final class Practice: PostgreSQLUUIDModel {
     var status: Bool
     var name: String
     var owner: UUID
-    public init ( status: Bool, name: String, owner: UUID) {
-       
+    var date: Date
+    var repeatAfter: Int
+    public init ( status: Bool, name: String, owner: UUID, date: Date, repeatAfter: Int) {
+        self.date = date
+        self.repeatAfter = repeatAfter
         self.status = status
         self.name = name
         self.owner = owner
