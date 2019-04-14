@@ -41,6 +41,12 @@ final class UserController: RouteCollection {
             return try practice.containg.query(on: req).all()
         }
     }
+    //-------друзья пользователя-----------
+    func getFriends (_ req: Request) throws -> Future<[User]> {
+        return try req.parameters.next(User.self).flatMap{ friend in
+            return try friend.makeFriend.query(on: req).all()
+        }
+    }
     //------добавить тренировку пользователю
     func addPracticeToUser(_ req: Request) throws -> Future <[String:User]> {
         let current = try req.parameters.next(User.self)
