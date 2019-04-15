@@ -100,6 +100,7 @@ final class UserController: RouteCollection {
             return current.deleteFriend(friend: deleted, on: req).transform(to: .noContent)
         }
     }
+    
     //-------получить публичные данные пользователя------
     func getPublicUser (_ req: Request) throws -> Future<PublicUser> {
         let user = try req.parameters.next(User.self)
