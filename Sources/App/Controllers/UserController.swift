@@ -8,8 +8,12 @@
 import Foundation
 import Vapor
 import Fluent
+import FluentSQL
 import Crypto
 import HTTP
+
+
+
 final class UserController: RouteCollection {
     func boot(router: Router) throws {
         let usersRoute = router.grouped( "users")
@@ -33,6 +37,7 @@ final class UserController: RouteCollection {
         tokenProtected.post(User.parameter, "addfriend", use: addFriendtoUser)
         tokenProtected.delete(User.parameter, "deletefriend", use: deleteFriendFromUser)
         tokenProtected.get(User.parameter, "friends", use: getFriends)
+        tokenProtected.get("search", use: searchFriend )
         
     }
     
@@ -99,6 +104,13 @@ final class UserController: RouteCollection {
         return flatMap(to: HTTPStatus.self, current, deleted) { current, deleted in
             return current.deleteFriend(friend: deleted, on: req).transform(to: .noContent)
         }
+    }
+    //----------поиск пользователя по имени---------host/users/search?name=email
+    func searchFriend (_ req: Request) throws -> Future<[User]> {
+        let email = try req.query.get(String.self, at: "email")
+        return User.query(on: req).group(.or) { query in
+            query.filter(\.email, .like, "\(email)%")
+            }.all()
     }
     
     //-------получить публичные данные пользователя------
