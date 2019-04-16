@@ -105,7 +105,7 @@ final class UserController: RouteCollection {
             return current.deleteFriend(friend: deleted, on: req).transform(to: .noContent)
         }
     }
-    //----------поиск пользователя по имени---------host/users/search?name=email
+    //----------поиск пользователя по имени---------host/users/search?email=email
     func searchFriend (_ req: Request) throws -> Future<[User]> {
         let email = try req.query.get(String.self, at: "email")
         return User.query(on: req).group(.or) { query in
