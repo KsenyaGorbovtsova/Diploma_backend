@@ -149,7 +149,6 @@ final class UserController: RouteCollection {
     func login(_ req: Request) throws -> Future<Token> {
         let user = try req.requireAuthenticated(User.self)
         let token = try Token.generate(for: user)
-        try getPublicUser(req)
         return token.save(on: req)
     }
     //------выход------
