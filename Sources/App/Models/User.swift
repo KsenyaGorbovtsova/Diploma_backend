@@ -18,9 +18,11 @@ final class User: PostgreSQLUUIDModel, Model {
     var secondName: String?
     var email: String
     var password: String
+    var image: Data?
     
-    init( email: String, password: String, firstName: String? = "Guest", secondName: String? = " ") {
+    init( email: String, password: String, firstName: String? = "Guest", secondName: String? = " ", image: Data) {
         //self.id = id
+        self.image = image
         self.firstName = firstName
         self.secondName = secondName
         self.email = email
