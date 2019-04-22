@@ -86,7 +86,7 @@ final class UserController: RouteCollection {
             }
         }
     }
-    //-------добавить друга пользователю---------------
+    //-------добавить друга пользователю-----------------
     func addFriendtoUser(_ req: Request) throws -> Future <[String: User]> {
         let current =  try req.parameters.next(User.self)
         let makeFriendId = req.content.get(User.ID.self, at: "makeFriend")
