@@ -73,6 +73,9 @@ final class UserController: RouteCollection {
             return current.deletePractice(practice: deleted, on: req).transform(to: .noContent)
         }
     }
+    
+
+    
     //------получить публичные данные пользователей-------
     func getPublicUsers(_ req: Request) throws -> Future<[PublicUser]>{
         let users = User.query(on:req).all()
@@ -182,4 +185,5 @@ final class UserController: RouteCollection {
         var image: Data?
     }
     
+
 }

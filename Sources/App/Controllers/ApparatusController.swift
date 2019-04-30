@@ -38,7 +38,7 @@ final class ApparatusController: RouteCollection{
         return apparatus.map(to: Apparatus.self, { apparatus in
             apparatus.id =  body.id ?? apparatus.id
             apparatus.name = body.name ?? apparatus.name
-            apparatus.image = body.image ?? apparatus.name
+            apparatus.image = body.image ?? apparatus.image
             return apparatus
         }).update(on: req)
     }
@@ -50,7 +50,7 @@ final class ApparatusController: RouteCollection{
     struct ApparatusContent: Content {
         var id: UUID?
         var name: String?
-        var image: String?
+        var image: Data?
         
     }
 }
