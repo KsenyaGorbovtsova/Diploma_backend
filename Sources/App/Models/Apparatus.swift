@@ -11,7 +11,7 @@ import FluentPostgreSQL
 
 
 
-final class Apparatus: PostgreSQLUUIDModel {
+final class Apparatus: PostgreSQLUUIDModel, Model {
     var id: UUID?
     var name: String
     var image: Data?
