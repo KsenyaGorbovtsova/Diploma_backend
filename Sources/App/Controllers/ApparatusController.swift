@@ -12,7 +12,7 @@ import Fluent
 final class ApparatusController: RouteCollection{
     func boot(router: Router) throws {
         let apparatuses = router.grouped("apparatuses")
-        apparatuses.post(Apparatus.self, use: create)
+        apparatuses.post(use: create)
         apparatuses.get(use: index)
         apparatuses.get(Apparatus.parameter, use:show)
         apparatuses.patch(ApparatusContent.self, at: Apparatus.parameter, use: update)
@@ -23,7 +23,7 @@ final class ApparatusController: RouteCollection{
         return Apparatus.query(on: req).all()
     }
     //--------создать запись-----------
-    func create (_ req: Request, _ apparatus: Apparatus) throws -> Future<Apparatus>{
+    func create (_ req: Request) throws -> Future<Apparatus>{
         return try req.content.decode(Apparatus.self).flatMap {apparatus in
             return apparatus.save(on: req)
         }
