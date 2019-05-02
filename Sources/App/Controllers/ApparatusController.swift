@@ -12,7 +12,7 @@ import Fluent
 final class ApparatusController: RouteCollection{
     func boot(router: Router) throws {
         let apparatuses = router.grouped("apparatuses")
-        apparatuses.post(use: create)
+        apparatuses.post("create", use: create)
         apparatuses.get(use: index)
         apparatuses.get(Apparatus.parameter, use:show)
         apparatuses.patch(ApparatusContent.self, at: Apparatus.parameter, use: update)
