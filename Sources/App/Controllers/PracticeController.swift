@@ -68,10 +68,10 @@ final class PracticeController: RouteCollection{
         var status: Bool
         var name: String
         var owner: UUID
-        var date: Date
-        var repeatAfter: Int
+        var date: Date?
+        var repeatAfter: Int?
         func model() -> Practice {
-            return Practice (status: self.status, name: self.name, owner: self.owner, date: self.date, repeatAfter: self.repeatAfter)
+            return Practice (status: self.status, name: self.name, owner: self.owner, date: self.date ??  (NSDate.distantPast as NSDate) as Date, repeatAfter: self.repeatAfter ?? 0)
         }
     }
 }
