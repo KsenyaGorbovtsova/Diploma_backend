@@ -143,8 +143,14 @@ final class UserController: RouteCollection {
             user.firstName = body.firstName ?? user.firstName
             user.secondName = body.secondName ?? user.secondName
             user.email = body.email ?? user.email
-            user.password = try BCrypt.hash(body.password ?? user.password)
-            user.image = try body.image ?? user.image
+            if let pswd = body.password  {
+                user.password = try BCrypt.hash(pswd)
+            } else {
+                let pswd1 = user.password
+                user.password = pswd1
+            }
+           //user.password = try BCrypt.hash(body.password ?? user.password)
+            user.image = body.image ?? user.image
             return user
         }).update(on: req)
     }
