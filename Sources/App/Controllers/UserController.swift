@@ -82,6 +82,7 @@ final class UserController: RouteCollection {
         return users.map { users -> [PublicUser] in
             try users.map { user in
                  PublicUser(
+                    id: user.id,
                     firstName: user.firstName,
                     secondName: user.secondName,
                     email: user.email,
@@ -122,6 +123,7 @@ final class UserController: RouteCollection {
         let user = try req.parameters.next(User.self)
         return user.map { user -> PublicUser in
             PublicUser(
+                id: user.id,
                 firstName: user.firstName,
                 secondName: user.secondName,
                 email: user.email,
@@ -162,10 +164,12 @@ final class UserController: RouteCollection {
     }
     //------выход------
     func logout(_ req: Request) throws -> Future<HTTPResponse> {
-        let user = try req.requireAuthenticated(User.self)
+      let user = try req.requireAuthenticated(User.self)
+        //let userId = try req.parameters.next(User.self)
         return try Token
             .query(on: req)
             .filter(\Token.userId == user.requireID())
+            //.filter(\Token.userId == userId.requireID())
             .delete()
             .transform(to: HTTPResponse(status: .ok))
     }
@@ -176,6 +180,7 @@ final class UserController: RouteCollection {
         }
     }
     struct PublicUser: Content {
+        var id: UUID?
         var firstName: String?
         var secondName: String?
        var email: String
