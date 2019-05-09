@@ -32,7 +32,7 @@ final class PracticeController: RouteCollection{
     }
     //------выгрузить тренировку по дате-------
     func getPracticeOnDate (_ req: Request) throws -> Future<[Practice]> {
-        return Practice.query(on: req).filter(\.date == Date().self).all()
+        return Practice.query(on: req).filter(\.date, .like, Date().self).all()
         
     }
     //---выгрузить упражнения, входящие в тренировку-------
