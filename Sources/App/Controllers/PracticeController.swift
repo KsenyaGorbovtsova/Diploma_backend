@@ -8,7 +8,7 @@
 import Foundation
 import Vapor
 import Fluent
-
+import FluentSQL
 final class PracticeController: RouteCollection{
     func boot(router: Router) throws {
         let practice = router.grouped("practices")
@@ -19,6 +19,7 @@ final class PracticeController: RouteCollection{
         practice.post( Practice.parameter,"addExercise", use: addExerciseToPractice)
         practice.delete(Practice.parameter, "deleteExercise", use: deleteExerciseFromPractice)
         practice.delete(Practice.parameter,"delete", use: delete)
+        practice.get("todayPractice", use: getPracticeOnDate)
         
     }
     ///----выгрузить все------
@@ -28,6 +29,11 @@ final class PracticeController: RouteCollection{
     ///-----выгрузить одну тренировку------
     func getOnePractice (_ req: Request) throws -> Future<Practice>{
         return try req.parameters.next(Practice.self)
+    }
+    //------выгрузить тренировку по дате-------
+    func getPracticeOnDate (_ req: Request) throws -> Future<[Practice]> {
+        return Practice.query(on: req).filter(\.date == Date().self).all()
+        
     }
     //---выгрузить упражнения, входящие в тренировку-------
     func exercisesInPractice (_ req: Request) throws -> Future<[Exercise]> {
