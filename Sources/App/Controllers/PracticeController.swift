@@ -32,7 +32,12 @@ final class PracticeController: RouteCollection{
     }
     //------выгрузить тренировку по дате-------
     func getPracticeOnDate (_ req: Request) throws -> Future<[Practice]> {
-        return Practice.query(on: req).filter(\.date, .like, Date().self).all()
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.dateFormat = "yyyy-MM-dd'T'00:00:00'Z'"
+        let today = formatter.string(from: Date())
+        let todayDate = formatter.date(from: today)
+        return Practice.query(on: req).filter(\.date == todayDate).all()
         
     }
     //---выгрузить упражнения, входящие в тренировку-------
