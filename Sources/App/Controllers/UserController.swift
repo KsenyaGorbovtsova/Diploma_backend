@@ -38,6 +38,7 @@ final class UserController: RouteCollection {
         tokenProtected.delete(User.parameter, "deletefriend", use: deleteFriendFromUser)
         tokenProtected.get(User.parameter, "friends", use: getFriends)
         tokenProtected.get("search", use: searchFriend )
+        tokenProtected.get("todayPractices", use: getPracticeOnDate)
         
     }
     
