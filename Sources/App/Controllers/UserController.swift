@@ -47,6 +47,19 @@ final class UserController: RouteCollection {
             return try practice.containg.query(on: req).all()
         }
     }
+    //--------тренировки пользователя сегодня------
+    func getPracticeOnDate (_ req: Request) throws -> Future<[Practice]> {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.dateFormat = "yyyy-MM-dd'T'00:00:00'Z'"
+        let today = formatter.string(from: Date())
+        let todayDate = formatter.date(from: today)
+        return try req.parameters.next(User.self).flatMap { practice in
+            return try practice.containg.query(on: req).filter(\.date == todayDate).all()
+        }
+        
+    }
+    
     //-------друзья пользователя-----------
     func getFriends (_ req: Request) throws -> Future<[User]> {
         return try req.parameters.next(User.self).flatMap{ friend in
