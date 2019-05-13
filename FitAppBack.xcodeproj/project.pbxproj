@@ -22,6 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		9E288A7C22620BFD00DD9140 /* FriendsConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E288A7B22620BFD00DD9140 /* FriendsConnection.swift */; };
+		9EF418442289B6A9006EEAF7 /* helpObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF418432289B6A9006EEAF7 /* helpObject.swift */; };
 		OBJ_1009 /* ApparatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* ApparatusController.swift */; };
 		OBJ_1010 /* ExerciseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* ExerciseController.swift */; };
 		OBJ_1011 /* MeasureUnitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* MeasureUnitController.swift */; };
@@ -5626,6 +5627,7 @@
 
 /* Begin PBXFileReference section */
 		9E288A7B22620BFD00DD9140 /* FriendsConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsConnection.swift; sourceTree = "<group>"; };
+		9EF418432289B6A9006EEAF7 /* helpObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helpObject.swift; sourceTree = "<group>"; };
 		"Auth::Authentication::Product" /* Authentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Authentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Console::Command::Product" /* Command.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Command.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Console::Console::Product" /* Console.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Console.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -7581,6 +7583,7 @@
 				OBJ_23 /* Token.swift */,
 				OBJ_24 /* User.swift */,
 				OBJ_25 /* UserPracticeConnection.swift */,
+				9EF418432289B6A9006EEAF7 /* helpObject.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -11621,6 +11624,7 @@
 				OBJ_1013 /* UserController.swift in Sources */,
 				OBJ_1014 /* Apparatus.swift in Sources */,
 				OBJ_1015 /* Exercise.swift in Sources */,
+				9EF418442289B6A9006EEAF7 /* helpObject.swift in Sources */,
 				9E288A7C22620BFD00DD9140 /* FriendsConnection.swift in Sources */,
 				OBJ_1016 /* ExercisePracticeConnection.swift in Sources */,
 				OBJ_1017 /* MeasureUnit.swift in Sources */,

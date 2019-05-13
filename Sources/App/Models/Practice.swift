@@ -9,7 +9,11 @@ import Foundation
 import Vapor
 import FluentPostgreSQL
 
-final class Practice: PostgreSQLUUIDModel {
+final class Practice: PostgreSQLUUIDModel, Hashable {
+    static func == (lhs: Practice, rhs: Practice) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     
     var id: UUID?
     var status: Bool
@@ -23,6 +27,9 @@ final class Practice: PostgreSQLUUIDModel {
         self.status = status
         self.name = name
         self.owner = owner
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 

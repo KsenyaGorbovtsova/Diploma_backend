@@ -7,6 +7,7 @@
 
 import Foundation
 import FluentPostgreSQL
+import Vapor
 
 final class ExercisePracticeConnection: PostgreSQLPivot {
     
@@ -27,7 +28,7 @@ final class ExercisePracticeConnection: PostgreSQLPivot {
 
 }
 extension ExercisePracticeConnection: Migration{}
-
+//extension ExercisePracticeConnection: Content{}
 extension Practice {
     var containing: Siblings <Practice, Exercise, ExercisePracticeConnection> {
         return self.siblings(\ExercisePracticeConnection.practiceId, \ExercisePracticeConnection.exerciseId)
@@ -44,4 +45,8 @@ extension Practice {
     }
 }
 
-
+extension Practice {
+    var exercises: Siblings<Practice, Exercise, ExercisePracticeConnection> {
+        return siblings()
+    }
+}
