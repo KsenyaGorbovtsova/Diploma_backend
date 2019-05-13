@@ -39,6 +39,7 @@ final class UserController: RouteCollection {
         tokenProtected.get(User.parameter, "friends", use: getFriends)
         tokenProtected.get("search", use: searchFriend )
         tokenProtected.get(User.parameter, "todayPractices", use: getPracticeOnDate)
+
     }
     
     //-------тренировки одного пользователя------
@@ -60,12 +61,10 @@ final class UserController: RouteCollection {
       //  return filteredPract
         var finalDict = [Practice:[Exercise]]()
         var arr = [Practice]()
-        filteredPract.do {fp in
-             arr = fp
-            }.catch {error in
-                print(error)
+        filteredPract.map{ ptr -> [Practice] in  arr = ptr
+           return arr
         }
-        return arr
+        
         
         /*
         
