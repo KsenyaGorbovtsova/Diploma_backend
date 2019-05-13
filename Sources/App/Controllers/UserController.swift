@@ -39,7 +39,6 @@ final class UserController: RouteCollection {
         tokenProtected.get(User.parameter, "friends", use: getFriends)
         tokenProtected.get("search", use: searchFriend )
         tokenProtected.get(User.parameter, "todayPractices", use: getPracticeOnDate)
-        
     }
     
     //-------тренировки одного пользователя------
@@ -49,7 +48,7 @@ final class UserController: RouteCollection {
         }
     }
     //--------тренировки пользователя сегодня------
-    func getPracticeOnDate (_ req: Request) throws ->[helper]{
+    func getPracticeOnDate (_ req: Request) throws -> Future<[Practice]> {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
         formatter.dateFormat = "yyyy-MM-dd'T'00:00:00'Z'"
@@ -58,7 +57,8 @@ final class UserController: RouteCollection {
         let filteredPract = try req.parameters.next(User.self).flatMap { practice -> EventLoopFuture<[Practice]> in
             return try practice.containg.query(on: req).filter(\.date == todayDate).all()
         }
-        var finalDict = [Practice:[Exercise]]()
+        return filteredPract
+        /*var finalDict = [Practice:[Exercise]]()
         var arr = [Practice]()
         filteredPract.do {fp in
              arr = fp
@@ -79,7 +79,9 @@ final class UserController: RouteCollection {
             a.exercises = x.value
             final.append(a)
         }
-        return final
+       
+       
+        return final*/
 
     }
     
