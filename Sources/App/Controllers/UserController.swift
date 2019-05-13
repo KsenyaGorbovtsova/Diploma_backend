@@ -61,9 +61,10 @@ final class UserController: RouteCollection {
       //  return filteredPract
         var finalDict = [Practice:[Exercise]]()
         var arr = [Practice]()
-        filteredPract.map{ ptr -> [Practice] in  arr = ptr
-           return arr
-        }
+        arr = try filteredPract.map{ ptr -> [Practice] in
+           return  ptr
+        }.wait()
+        return arr
         
         
         /*
