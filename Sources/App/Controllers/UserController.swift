@@ -178,14 +178,25 @@ final class UserController: RouteCollection {
     }
     //------выход------
     func logout(_ req: Request) throws -> Future<HTTPResponse> {
-      let user = try req.requireAuthenticated(User.self)
+        return try req.parameters.next(User.self).flatMap { user in
+            return try Token
+                .query(on: req)
+                .filter(\Token.userId == user.id!)
+                //.filter(\Token.userId == userId.requireID())
+                .delete()
+                .transform(to: HTTPResponse(status: .ok))
+            
+        }
+    
+   /* let user = try req.requireAuthenticated(User.self)
+        
         //let userId = try req.parameters.next(User.self)
         return try Token
             .query(on: req)
             .filter(\Token.userId == user.requireID())
             //.filter(\Token.userId == userId.requireID())
             .delete()
-            .transform(to: HTTPResponse(status: .ok))
+            .transform(to: HTTPResponse(status: .ok))*/
     }
     //------удаление пользователя-------
     func deleteUser(_ req: Request) throws -> Future<HTTPStatus>{
