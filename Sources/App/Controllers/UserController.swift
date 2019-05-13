@@ -54,39 +54,16 @@ final class UserController: RouteCollection {
         formatter.calendar = Calendar(identifier: .iso8601)
         formatter.dateFormat = "yyyy-MM-dd'T'00:00:00'Z'"
         let today = formatter.string(from: Date())
-        let todayDate = formatter.date(from: today)
-        let filteredPract = try req.parameters.next(User.self).flatMap { practice -> EventLoopFuture<[Practice]> in
-            return try practice.containg.query(on: req).filter(\.date == todayDate).all()
-        }
-      //  return filteredPract
-        var finalDict = [Practice:[Exercise]]()
         var arr = [Practice]()
-        arr = try filteredPract.map{ ptr -> [Practice] in
-           return  ptr
-        }.wait()
-        return arr
-        
-        
-        /*
-        
-        var aa = [Exercise]()
-        for x in arr {
-            let a = try x.exercises.query(on: req).all().do {aaa in
-                aa = aaa
+        let todayDate = formatter.date(from: today)
+        let filterePrac = try req.parameters.next(User.self).flatMap { practice -> EventLoopFuture<[Practice]> in
+            return try practice.containg.query(on: req).filter(\.date == todayDate).all()
+            }.map {ptr in
+                for x in ptr {
+                    arr.append(x)
+                }
             }
-            finalDict[x] = aa
-        }
-        var final = [helper]()
-        for x in finalDict {
-            var a = helper()
-            a.practice.append(x.key)
-            a.exercises = x.value
-            final.append(a)
-        }
-       
-       
-        return final*/
-
+        return arr
     }
     
     //-------друзья пользователя-----------
