@@ -49,21 +49,16 @@ final class UserController: RouteCollection {
         }
     }
     //--------тренировки пользователя сегодня------
-    func getPracticeOnDate (_ req: Request) throws -> [Practice] {
+    func getPracticeOnDate (_ req: Request) throws -> Future<[Practice]> {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
         formatter.dateFormat = "yyyy-MM-dd'T'00:00:00'Z'"
         let today = formatter.string(from: Date())
-        var arr = [Practice]()
         let todayDate = formatter.date(from: today)
-        let filterePrac = try req.parameters.next(User.self).flatMap { practice -> EventLoopFuture<[Practice]> in
+        return try req.parameters.next(User.self).flatMap { practice in
             return try practice.containg.query(on: req).filter(\.date == todayDate).all()
-            }.map {ptr in
-                for x in ptr {
-                    arr.append(x)
-                }
             }
-        return arr
+       
     }
     
     //-------друзья пользователя-----------
