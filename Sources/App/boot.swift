@@ -1,5 +1,7 @@
+import Foundation
 import Vapor
-
+import Fluent
+import FluentSQL
 /// Called after your application has initialized.
 public func boot(_ app: Application) throws {
     // your code here
