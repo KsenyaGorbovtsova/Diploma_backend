@@ -21,7 +21,7 @@ public func boot(_ app: Application) throws {
                     return newPractice.save(on: conn)
                     }
                     .flatten(on: app)
-                    .transform(to: ())
+                    .transform(to: Practice)
             }
         }
     }
