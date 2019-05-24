@@ -25,6 +25,8 @@ public func boot(_ app: Application) throws {
                            return  newUser.addPractice( practice: newPractice.id,  on: conn).transform(to: Void())
                             
                         }
+                        return users.transform(to: Void())
+
                     }
                   
                     
