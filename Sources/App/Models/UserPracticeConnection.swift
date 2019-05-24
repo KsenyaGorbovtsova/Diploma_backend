@@ -41,6 +41,7 @@ extension User {
             return pivot.save(on: connection).transform(to: (self, practice))
         }
     }
+ 
     func deletePractice (practice: Practice, on connection: DatabaseConnectable) -> Future <(current: User, deleted: Practice)>
     {
         return self.containg.detach(practice, on: connection).transform(to: (self, practice))
