@@ -22,7 +22,7 @@ public func boot(_ app: Application) throws {
                     return users.flatMap { users in
                         users.map { user -> Future<Void> in
                             let newUser = user.userId
-                           return  newUser.addPractice( practice: newPractice.id,  on: conn).transform(to: Void())
+                           return  newUser.addPractice( practice: newPractice.id,  on: conn)
                             
                         }
 
