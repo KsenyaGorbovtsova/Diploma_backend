@@ -5,7 +5,7 @@ import FluentSQL
 /// Called after your application has initialized.
 public func boot(_ app: Application) throws {
     // your code here
-    app.eventLoop.scheduleRepeatedTask(initialDelay: .seconds(0), delay: .hours(24)) { task in
+    app.eventLoop.scheduleRepeatedTask(initialDelay: .seconds(0), delay: .minutes(1)) { task in
         app.withPooledConnection(to: .psql) { conn -> Future<Void> in
             let formatter = DateFormatter()
             formatter.calendar = Calendar(identifier: .iso8601)
