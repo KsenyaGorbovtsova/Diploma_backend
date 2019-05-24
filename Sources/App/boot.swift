@@ -20,7 +20,7 @@ public func boot(_ app: Application) throws {
                     return exercise.flatMap { exercise -> Future<Void> in
                         exercise.map {
                             exr in
-                            newPractice.addExercise(exercise: exr, on: conn)
+                            newPractice.addExercise(exercise: exr, on: conn).transform(to: Void())
                         }
                         
                     }
