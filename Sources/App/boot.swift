@@ -16,17 +16,17 @@ public func boot(_ app: Application) throws {
             return practices.flatMap { practices -> Future<Void> in
                 practices.map { practice in
                    let newPractice = Practice(status: practice.status ?? false, name: practice.name ?? "Без названия", owner: practice.owner, date: Calendar.current.date(byAdding: .day, value: practice.repeatAfter ?? 0, to: practice.date ?? Date.distantPast) ?? Date.distantPast, repeatAfter: practice.repeatAfter ?? 0)
-                    let user = practice.containing.query(on: conn).all()
-                    return user.flatMap { user -> Future<Void> in
-                        user.map {
-                            usr in
-                            usr.addPractice(practice: practice.id!, on: conn)
+                    let exercise = practice.containing.query(on: conn).all()
+                    return exercise.flatMap { exercise -> Future<Void> in
+                        exercise.map {
+                            exr in
+                            newPractice.addExercise(exercise: exr.id!, on: conn)
                         }
                         
                     }
                    /* practice.date = Calendar.current.date(byAdding: .day, value: practice.repeatAfter, to: practice.date)*/
                     
-                  //  return newPractice.save(on: conn).transform(to: Void())
+                   return newPractice.save(on: conn).transform(to: Void())
                     }
                     .flatten(on: app)
                 
