@@ -30,7 +30,7 @@ public func boot(_ app: Application) throws {
                     
                    /* practice.date = Calendar.current.date(byAdding: .day, value: practice.repeatAfter, to: practice.date)*/
                     
-                    return 0.transform(to: Void())
+                    return users.transform(to: Void())
                     }
                     .flatten(on: app)
                 
