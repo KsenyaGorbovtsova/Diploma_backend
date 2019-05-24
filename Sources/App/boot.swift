@@ -18,7 +18,7 @@ public func boot(_ app: Application) throws {
                 practices.map { practice in
                     let newPractice = Practice(status: practice.status ?? false, name: practice.name ?? "Без названия", owner: practice.owner, date: Calendar.current.date(byAdding: .day, value: practice.repeatAfter ?? 0, to: practice.date ?? Date.distantPast) ?? Date.distantPast, repeatAfter: practice.repeatAfter ?? 0)
                    /* practice.date = Calendar.current.date(byAdding: .day, value: practice.repeatAfter, to: practice.date)*/
-                    return newPractice.save(on: conn)
+                     newPractice.save(on: conn)
                     }
                     .flatten(on: app)
                     .transform(to: ())
