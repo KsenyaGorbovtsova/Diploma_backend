@@ -18,10 +18,10 @@ public func boot(_ app: Application) throws {
                 return practices.flatMap { practices -> Future<Void> in
                     practices.map { practice in
                         practice.date = Calendar.current.date(byAdding: .day, value: practice.repeatAfter, to: practice.date)
-                        return practice.update(on: conn)
+                        return practice.update(on: conn).transform(to: ())
                         }
                         .flatten(on: app)
-                        .transform(to: ())
+                    
                 }
             }
         }
