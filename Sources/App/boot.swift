@@ -21,7 +21,7 @@ public func boot(_ app: Application) throws {
                         exercise.map {
                             exr in
                             newPractice.addExercise(exercise: exr, on: conn).transform(to: Void())
-                        }
+                        }.transform(to: Void())
                         
                     }
                                        /* practice.date = Calendar.current.date(byAdding: .day, value: practice.repeatAfter, to: practice.date)*/
