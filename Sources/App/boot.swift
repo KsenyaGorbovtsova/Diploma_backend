@@ -24,7 +24,7 @@ public func boot(_ app: Application) throws {
                         }
                         
                     }
-                   /* practice.date = Calendar.current.date(byAdding: .day, value: practice.repeatAfter, to: practice.date)*/
+                                       /* practice.date = Calendar.current.date(byAdding: .day, value: practice.repeatAfter, to: practice.date)*/
                     
                    return newPractice.save(on: conn).transform(to: Void())
                     }
