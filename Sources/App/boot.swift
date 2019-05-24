@@ -20,9 +20,9 @@ public func boot(_ app: Application) throws {
                     newPractice.save(on: conn).transform(to: Void())
                     let users = UserPracticeConnection.query(on:conn).filter(\.practiceId == practice.id!).all()
                     return users.flatMap { users in
-                        users.map { user -> Future<_> in
+                        users.map { user -> Future<Void> in
                             let newUser = user.userId
-                           return  newUser.addPractice( practice: newPractice.id,  on: conn)
+                           return  newUser.addPractice( practice: newPractice.id,  on: conn).transform(to: Void())
                             
                         }
 
