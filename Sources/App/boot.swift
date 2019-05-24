@@ -19,13 +19,12 @@ public func boot(_ app: Application) throws {
                      let newPractice = Practice(status: practice.status ?? false, name: practice.name ?? "Без названия", owner: practice.owner, date: Calendar.current.date(byAdding: .day, value: practice.repeatAfter ?? 0, to: practice.date ?? Date.distantPast) ?? Date.distantPast, repeatAfter: practice.repeatAfter ?? 0)
                     newPractice.save(on: conn).transform(to: Void())
                     let users = UserPracticeConnection.query(on:conn).filter(\.practiceId == practice.id!).all()
-                    return users.flatMap { users -> Future<Void> in
+                    return users.flatMap { users in
                         users.map { user in
                             let newUser = user.userId
                            return  newUser.addPractice( practice: newPractice.id,  on: conn).transform(to: Void())
                             
                         }
-                        return users.transform(to: Void())
 
                     }
                   
