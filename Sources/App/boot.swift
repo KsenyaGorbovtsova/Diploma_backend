@@ -12,8 +12,8 @@ public func boot(_ app: Application) throws {
                 formatter.calendar = Calendar(identifier: .iso8601)
                 formatter.dateFormat = "yyyy-MM-dd'T'00:00:00'Z'"
                 let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-                let today = formatter.string(from: Date())
-                let todayDate = formatter.date(from: yesterday)
+                let today = formatter.string(from: yesterday!)
+                let todayDate = formatter.date(from: today)
                 let practices = Practice.query(on: conn).filter(\.date == todayDate).all()
                 
                 return practices.flatMap { practices -> Future<Void> in
